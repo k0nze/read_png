@@ -137,6 +137,10 @@ int read_rgb_png(int**** image, const char* png_path, int* height, int* width) {
     }
     free(row_pointers);
 
+    // free png memory
+    png_free_data(png, png_info, PNG_FREE_ALL, -1);
+    png_destroy_read_struct(&png, &png_info, &png_info);
+
     return 0;
 }
 
@@ -263,6 +267,10 @@ int read_grayscale_png(int*** image, const char* png_path, int* height, int* wid
         free(row_pointers[y]);
     }
     free(row_pointers);
+
+    // free png memory
+    png_free_data(png, png_info, PNG_FREE_ALL, -1);
+    png_destroy_read_struct(&png, &png_info, &png_info);
 
     return 0;
 
